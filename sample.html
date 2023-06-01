@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS-Xperiment</title>
+    <style>
+      body{
+        margin: 0;padding: 0;
+        background-color: azure;
+      }
+    .container{
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        /* text-align: center; */
+      }
+      img{
+        height: 300px;        
+      }
+      button{
+        margin: 20px 0 0 0;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid rgb(65, 64, 64);
+        cursor: pointer;
+        box-shadow: 4px 4px 16px 4px rgb(231, 221, 221);
+      }
+    </style>
+  </head>
+  <body>
+      <div class="container">
+        <h1>Click to change image</h1>
+        <img src="/bg-1.jpg" alt="image" />
+        <button>Change user</button>
+    </div>    
+
+    <script>
+        const myImage = document.querySelector("img");
+        // // Arrow function to make image clickable
+        myImage.onclick = () => {
+            // We can get any attribute of our HTML element by using getAttribute() method
+            const mySrc = myImage.getAttribute("src");
+            // console.log(mySrc);
+            if(mySrc === myImage.getAttribute("src")){
+                myImage.setAttribute('src', "/bg-2.png");
+            }else{
+                myImage.setAttribute('src', "/bg-1.jpg");
+            }
+        };
+
+        // const mySrc = myImage.getAttribute("src")
+        //     console.log(mySrc);
+
+        let myButton = document.querySelector("button");
+        let myHeading = document.querySelector("h1");
+
+        // This function would set new user name 
+        function setUserName() {
+        // We use prompt() which displays a dialog box, so that we can take values as an input from user
+        const myName = prompt("Please enter your name.");
+        // localStorage.setItem() sets value to key
+        localStorage.setItem("name", myName);
+        myHeading.textContent = `This function is cool, ${myName}`;
+}
+        if (!localStorage.getItem("name")) {
+        setUserName();
+        } else {
+        const storedName = localStorage.getItem("name");
+        myHeading.textContent = `This function is cool, ${storedName}`;
+        }
+        // When clicked, setUserName() runs. This allows the user to enter a different name by pressing the button.
+        myButton.onclick = () => {
+        setUserName();
+        };
+
+        // This function will check if user has entered his name or not, if not then it will execute
+        function setUserName() {
+        const myName = prompt("Please enter your name.");
+        if (!myName) {
+            setUserName();
+        } else {
+            localStorage.setItem("name", myName);
+            myHeading.textContent = `This function is cool, ${myName}`;
+        }
+        }
+
+
+
+    </script>
+  </body>
+
+</html>
